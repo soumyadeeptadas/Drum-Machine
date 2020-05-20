@@ -1,0 +1,282 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #3A0000;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.App .dashboard-container {
+  background: black;
+  color: #DC143C;
+  text-shadow: 0 0 20px #DC143C, 0 0 20px #DC143C;
+  width: 700px;
+  padding: 2rem;
+  display: flex;
+  margin: auto;
+  border-radius: 20px;
+  box-shadow: 0 5px 40px rgba(220, 20, 60, 0.2), 0 5px 40px rgba(220, 20, 60, 0.2) inset;
+}
+.App .dashboard-container .drum-container {
+  min-height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.App .dashboard-container .drum-container h1 {
+  margin: 0;
+  margin-bottom: 1.5rem;
+  padding: 0;
+  text-transform: uppercase;
+  text-align: left;
+  background: radial-gradient(ellipse at center, #DC143C 0%, #000000 70%);
+}
+.App .dashboard-container .drum-container .drumbtn-container {
+  background-color: black;
+  justify-self: flex-end;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+.App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn {
+  color: rgba(220, 20, 60, 0);
+  border: 2px solid rgba(220, 20, 60, 0.7);
+  user-select: none;
+  text-shadow: none;
+  border-radius: 50%;
+  font-size: 1.7rem;
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(#3a3a3a, black);
+  transition: all 0.1s linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: loadAnimation .8s ease-in-out;
+}
+.App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn:focus {
+  outline: none;
+}
+.App .dashboard-container .control-container {
+  min-height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 3rem;
+}
+.App .dashboard-container .control-container .power-wrapper {
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+.App .dashboard-container .control-container .screen-wrapper {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  font-size: 2rem;
+  border: 2px solid #DC143C;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #DC143C, 0 0 20px #DC143C;
+  background: radial-gradient(ellipse at center, #DC143C 0%, #000000 70%);
+}
+.App .dashboard-container .control-container .screen-wrapper .screen,
+.App .dashboard-container .control-container .screen-wrapper .volume {
+  margin-top: auto;
+}
+.App .dashboard-container .control-container .screen-wrapper .volume {
+  text-align: left;
+  font-size: 1rem;
+}
+.App .dashboard-container .control-container .volume-wrapper,
+.App .dashboard-container .control-container .bank-wrapper {
+  margin-top: auto;
+}
+.App .dashboard-container .control-container .volume-slider {
+  width: 100%;
+  border-radius: 10px;
+  appearance: none;
+  height: 8px;
+  background: #999;
+  outline: none;
+  box-shadow: 0 0 20px #DC143C, 0 0 20px #DC143C;
+}
+.App .dashboard-container .control-container .volume-slider::-webkit-slider-thumb {
+  width: 100%;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid #aaa;
+  cursor: pointer;
+  background: radial-gradient(#3a3a3a, #222);
+}
+.App .dashboard-container .control-container .bank-wrapper {
+  justify-self: flex-end;
+  display: flex;
+}
+.App .dashboard-container .control-container .bank-wrapper .bank {
+  flex: 1;
+  border-radius: 10px;
+  background: black;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0 20px #DC143C, 0 0 20px #DC143C;
+  color: #DC143C;
+  text-shadow: 0 0 20px #DC143C, 0 0 20px #DC143C;
+}
+.App .dashboard-container .control-container .bank-wrapper .bank:focus {
+  outline: none;
+}
+.App .dashboard-container .control-container .bank-wrapper .bank:nth-of-type(2) {
+  margin-left: 5px;
+}
+.App .dashboard-container .control-container .bank-wrapper .bank.activeBank {
+  background: radial-gradient(ellipse at center, #DC143C 0%, #000000 70%);
+}
+
+#power {
+  display: none;
+}
+
+.fa-power-off {
+  padding: 0;
+  text-shadow: 2px 2px 40px #DC143C, -2px -2px 40px #DC143C, -2px 2px 40px crimson, 2px -2px 40px #DC143C, 0 0 20px #DC143C;
+}
+
+#power:checked + .powerLabel .fa-power-off {
+  color: rgba(220, 20, 60, 0.5);
+  text-shadow: none;
+}
+
+@media screen and (max-width: 600px) {
+  .App .dashboard-container {
+    min-height: 400px;
+    margin: 1rem;
+  }
+  .App .dashboard-container h1 {
+    font-size: 1.5rem;
+  }
+  .App .dashboard-container .drum-container .drumbtn-container {
+    padding-top: 2rem;
+  }
+  .App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn {
+    width: 60px;
+    height: 60px;
+  }
+  .App .dashboard-container .control-container .screen {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 450px) {
+  .App .dashboard-container {
+    margin: 1rem;
+    flex-direction: column;
+    position: relative;
+  }
+  .App .dashboard-container h1 {
+    font-size: 1.5rem;
+  }
+  .App .dashboard-container .drum-container {
+    width: 100%;
+  }
+  .App .dashboard-container .drum-container .drumbtn-container {
+    padding-top: 2rem;
+  }
+  .App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn {
+    width: 80px;
+    height: 80px;
+  }
+  .App .dashboard-container .control-container {
+    width: 100%;
+    margin: 2rem 0 0 0;
+  }
+  .App .dashboard-container .control-container .power-wrapper {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+  .App .dashboard-container .control-container .screen-wrapper,
+  .App .dashboard-container .control-container .volume-wrapper {
+    margin-bottom: 1rem;
+  }
+}
+@keyframes loadAnimation {
+  0% {
+    color: rgba(219, 246, 255, 0);
+    transform: scale(1);
+    box-shadow: none;
+  }
+  50% {
+    color: #dbf6ff;
+    transform: scale(0.9);
+    box-shadow: 1px 1px 10px 3px #dbf6ff, -1px -1px 10px 3px #dbf6ff;
+  }
+  100% {
+    color: rgba(219, 246, 255, 0);
+    transform: scale(1);
+    box-shadow: none;
+  }
+}
+.App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn:nth-of-type(1) {
+  animation-delay: 0.1s;
+}
+
+.App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn:nth-of-type(2) {
+  animation-delay: 0.2s;
+}
+
+.App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn:nth-of-type(3) {
+  animation-delay: 0.3s;
+}
+
+.App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn:nth-of-type(4) {
+  animation-delay: 0.4s;
+}
+
+.App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn:nth-of-type(5) {
+  animation-delay: 0.5s;
+}
+
+.App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn:nth-of-type(6) {
+  animation-delay: 0.6s;
+}
+
+.App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn:nth-of-type(7) {
+  animation-delay: 0.7s;
+}
+
+.App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn:nth-of-type(8) {
+  animation-delay: 0.8s;
+}
+
+.App .dashboard-container .drum-container .drumbtn-container .drum-pad.btn:nth-of-type(9) {
+  animation-delay: 0.9s;
+}
+
+#author {
+  display: block;
+  float: center;
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 20px;
+  padding: 50px 0 20px 0;
+  color: #fff;
+  background-color: #3a0000;
+}
+#author a {
+  text-decoration: none;
+  color: #fff;
+}
